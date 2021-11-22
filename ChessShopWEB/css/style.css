@@ -22,6 +22,7 @@ header{
     align-items: center; 
     justify-content: center;
 }
+/* Footer */
 footer
 {
     position: absolute;
@@ -115,3 +116,5 @@ section
     -webkit-background-size: cover;
     background-size: cover;
 }
+
+/* Форма заказа */
