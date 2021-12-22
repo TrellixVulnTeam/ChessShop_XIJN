@@ -1,11 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\cart",
+    "\\ChessShop",
+    "\\ChessShop\\settings",
     "\\contacts",
+    "\\main",
+    "\\main\\main",
+    "\\media",
     "\\products",
     "\\users"
   ],
-  "SelectedNode": "\\contacts\\views.py",
+  "SelectedNode": "\\ChessShop\\settings\\production.py",
   "PreviewInSolutionExplorer": false
 }

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.urls.conf import include
+from django.urls.conf import include, re_path
 from rest_framework import routers
 from cart.urls import router as cart_urls
 from products.urls import router as products_urls
@@ -37,3 +37,7 @@ urlpatterns = [
     #path('api/users/', include('users.urls')),
     #path('api/main', include('main.urls')),
 ]
+urlpatterns+=[
+    #let the frontend handle the 404
+    re_path(r'(?P<path>.*)',include(router.urls))
+    ]

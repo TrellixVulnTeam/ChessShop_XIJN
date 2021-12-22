@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ChessShop",
+    "\\ChessShop\\main",
+    "\\ChessShop\\products",
+    "\\ChessShop\\users"
   ],
+  "SelectedNode": "\\ChessShop\\users\\admin.py",
   "PreviewInSolutionExplorer": false
 }

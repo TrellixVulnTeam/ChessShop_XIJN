@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import Views
 
-def index(request):
-    return HttpResponse('<b>text/b>')
-
-def about(request):
-    return HttpResponse('<i>text</i>')
+class FrontEndRenderView(View):
+    def get(self,request,*args,**kwargs):
+        return render('main/main.html',{})
 
 
 # Create your views here.
