@@ -10,6 +10,8 @@ class UserAccount(models.Model):
     lastName = models.CharField(max_length=100)
     patronymic = models.CharField(max_length=100)
     profilePicture = models.ImageField(default='default_profile_picture.jpg')
+    gender = models.CharField(max_length = 10)
+    experience = models.CharField(max_length = 10)
     city = models.CharField(max_length=100)
 
 
