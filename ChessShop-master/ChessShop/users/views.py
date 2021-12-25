@@ -8,6 +8,7 @@ from django.http import JsonResponse
 # Create your views here.
 def get_account(request,id):
     user = models.UserAccount.objects.get(id = id)
+    return user
 
 def register(request):
     if request.method == "POST":
