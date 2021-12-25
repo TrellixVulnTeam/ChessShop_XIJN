@@ -28,14 +28,14 @@ router.registry.extend(products_urls.registry)
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
-    #path('api/products/', include('products.urls')),
+    path('api/products/', include('products.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    #path('api/cart/', include('cart.urls')),
-    #path('api/products/', include('products.urls')),
+    path('api/cart/', include('cart.urls')),
+    path('api/products/', include('products.urls')),
     path('api/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
-    #path('api/users/', include('users.urls')),
-    #path('api/main', include('main.urls')),
+    path('api/users/', include('users.urls')),
+    path('api/main', include('main.urls')),
 ]
 urlpatterns+=[
     #let the frontend handle the 404
