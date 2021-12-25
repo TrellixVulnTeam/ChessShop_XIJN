@@ -16,7 +16,6 @@ class RegisterSerializer(serializers.Serializer):
         }
     
     def create(self,validated_data):
-        user = UserAccount.objects.create(
         firstName = validated_data["firstName"]
         lastName = validated_data["lastName"]
         patronymic = validated_data["patronymic"]
@@ -24,5 +23,14 @@ class RegisterSerializer(serializers.Serializer):
         gender = validated_data["gender"]
         experience = validated_data["experience"]
         city = validated_data["city"]
-        )
-        return user 
+        user = UserAccount.objects.create(  
+            firstName = firstName
+            lastName = lastName
+            patronymic = patronymic
+            profilePicture = profilePicture
+            gender = gender
+            experience = experience
+            city = city)
+          
+        
+        return user
