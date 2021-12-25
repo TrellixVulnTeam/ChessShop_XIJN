@@ -1,21 +1,67 @@
-﻿from django.db.models.fields import json
-from django.shortcuts import redirect, render 
+﻿from django.shortcuts import redirect, render 
 from . import models
 from .forms import CreateUserForm
 from main import urls
-from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework.Response import Response
+from rest_framework.auththoken.serializers import AuthTokenSerializer
+from knox.auth import AuthToken
+from .serializer import RegisterSerializer
 
 # Create your views here.
-def get_account(request,id):
-    user = models.UserAccount.objects.get(id = id)
-    return user
+@api_view(["POST"])
+def login_api(request):
+    _serializer = AuthTokenSerializer(data=request.data)
+    _serializer.is_valid(raise_exception=True)
+    user = _serializer.validated_data['users']
+    _,token = AuthToken.objects.create(user)
+    return Response({
+        "user info":{
+            'id': user.id,
+             'firstName': user.firstName,
+             'lastName': user.lastName,
+             'patronymic': user.patronymic,
+             'profilePicture': user.profilePicture,
+             'gender': user.gender,
+             'city': user.city,
+             'experience':user.experience
+        },
+        "token":token
+    })
 
-def register(request):
-    if request.method == "POST":
-        newUser = CreateUserForm(request.method.POST)
-        if newUser.is_valid():
-            newUser.save()
-            redirect('main-index')
-    context = {"form":newUser}
-    render(request,'header.html',context)
-    return JsonResponse(newUser,safe = False)
+@api_view(["GET"])
+def get_user_data(request):
+    user = request.user
+    if user.is_authenticated():
+        return Response({
+            "user_info":{
+                'id': user.id,
+             'firstName': user.firstName,
+             'lastName': user.lastName,
+             'patronymic': user.patronymic,
+             'profilePicture': user.profilePicture,
+             'gender': user.gender,
+             'city': user.city,
+             'experience':user.experience
+            }
+        })
+
+@api_view(["POST"])
+def register_api(request):
+    serializer = RegisterSerializer(data = request.data)
+    serializer.is_valid(raise_exception = True)
+    user = serializer.save()
+    _,token = AuthToken.objects.create(user=user)
+    return Response({
+        "user info":{
+            'id': user.id,
+             'firstName': user.firstName,
+             'lastName': user.lastName,
+             'patronymic': user.patronymic,
+             'profilePicture': user.profilePicture,
+             'gender': user.gender,
+             'city': user.city,
+             'experience':user.experience
+        },
+        "token":token
+    })
